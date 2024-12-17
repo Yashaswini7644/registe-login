@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Hackathon Registration & Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .link {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="form-container">
+        <h2>Hackathon Registration</h2>
+        <form id="register-form">
+            <input type="text" id="reg-username" placeholder="Enter Username" required>
+            <input type="password" id="reg-password" placeholder="Enter Password" required>
+            <button type="button" onclick="register()">Register</button>
+        </form>
+
+        <div class="link">
+            Already have an account? <a href="#" onclick="showLogin()">Login</a>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" style="display: none;">
+            <h2>Hackathon Login</h2>
+            <input type="text" id="login-username" placeholder="Enter Username" required>
+            <input type="password" id="login-password" placeholder="Enter Password" required>
+            <button type="button" onclick="login()">Login</button>
+        </form>
+
+        <div class="link" style="display: none;" id="back-link">
+            Don't have an account? <a href="#" onclick="showRegister()">Register</a>
+        </div>
+    </div>
+
+    <script>
+        // Functions to toggle between forms
+        function showLogin() {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('back-link').style.display = 'block';
+        }
+
+        function showRegister() {
+            document.getElementById('register-form').style.display = 'block';
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('back-link').style.display = 'none';
+        }
+
+        // Simple JavaScript to handle registration and login
+        let users = {};
+
+        function register() {
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+
+            if (username && password) {
+                if (users[username]) {
+                    alert("Username already exists. Please try another.");
+                } else {
+                    users[username] = password;
+                    alert("Registration successful! You can now login.");
+                    showLogin();
+                }
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+
+        function login() {
+            const username = document.getElementById('login-username').value;
+            const password = document.getElementById('login-password').value;
+
+            if (username && password) {
+                if (users[username] && users[username] === password) {
+                    alert(`Welcome, ${username}! You are successfully logged in.`);
+                } else {
+                    alert("Invalid username or password.");
+                }
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+    </script>
+</body>
+</html>
